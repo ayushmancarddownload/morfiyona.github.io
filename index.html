@@ -10,6 +10,7 @@
     {{Canonical}}
     {{Schema}}
     
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-46B1TJ3M7T"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -199,7 +200,7 @@
         .stage-wrapper {
             display: flex; 
             justify-content: center; 
-            align-items: flex-start;
+            align-items: flex-start; /* Keeps ads at the top */
             gap: 20px; 
             padding: 0 10px; 
             margin-bottom: 50px;
@@ -213,16 +214,21 @@
             box-shadow: var(--shadow-float);
         }
 
-        /* AD BOX STYLES (Vertical Towers) */
+        /* --- FIXED AD STYLES --- */
         .ad-tower {
-            width: 160px; /* Exact width for 160x600 Ad */
-            min-height: 600px;
-            /* Placeholder styling removed for production */
-            display: flex; align-items: flex-start; justify-content: center;
+            width: 160px;
+            height: 600px; /* Forced Height */
+            display: block;
             flex-shrink: 0;
+            overflow: visible; /* Let iframe overflow if needed */
+        }
+        /* Force iframe inside tower to take full height */
+        .ad-tower iframe {
+            height: 600px !important;
+            width: 160px !important;
+            display: block;
         }
 
-        /* AD BANNER STYLES (Horizontal) */
         .ad-banner-container {
             width: 100%;
             max-width: 1000px;
@@ -231,9 +237,15 @@
             display: flex; justify-content: center;
         }
         .ad-banner {
-            width: 728px; /* Exact width for 728x90 Ad */
-            height: 90px;
-            display: flex; align-items: center; justify-content: center;
+            width: 728px;
+            height: 90px; /* Forced Height */
+            display: block;
+        }
+        /* Force iframe inside banner to take full height */
+        .ad-banner iframe {
+            height: 90px !important;
+            width: 728px !important;
+            display: block;
         }
 
         .game-frame-container {
@@ -245,7 +257,8 @@
             background-image: linear-gradient(135deg, #b2dfdb 0%, #80cbc4 100%);
         }
         
-        iframe { width: 100%; height: 100%; border: none; }
+        /* Game Iframe */
+        .game-frame-container iframe { width: 100%; height: 100%; border: none; }
 
         .overlay {
             position: absolute; inset: 0; background: rgba(255,255,255,0.6);
@@ -405,6 +418,7 @@
         </div>
     </div>
 
+    <!-- Cookie Consent Banner -->
     <div id="cookieConsent" class="cookie-consent">
         <p>We use cookies to ensure you get the best experience on our website. <a href="privacy.html">Privacy Policy</a></p>
         <button onclick="acceptCookies()">Got it!</button>
@@ -432,7 +446,9 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-scroll">
             
+            <!-- AUTHOR BIO SECTION -->
             <div id="authorContainer" class="author-widget">
+                <!-- Data will be loaded here by JS -->
                 <div class="author-img-wrapper">
                     <div style="width:100%; height:100%; border-radius:50%; background:#e0f2f1;"></div>
                 </div>
@@ -449,6 +465,7 @@
 
     <main>
         <div class="stage-wrapper">
+            <!-- Left Ad Tower (160x600) -->
             <div class="ad-tower">
                 <script>
                     atOptions = {
@@ -462,6 +479,7 @@
                 <script src="https://www.highperformanceformat.com/2f68a0c68f8f4abf1e3fbfcbebf8f01d/invoke.js"></script>
             </div>
 
+            <!-- Game Display -->
             <div class="game-display">
                 <div class="game-frame-container">
                     <iframe id="gameFrame" src="about:blank"></iframe>
@@ -483,6 +501,7 @@
                 </div>
             </div>
 
+            <!-- Right Ad Tower (160x600) -->
             <div class="ad-tower">
                 <script>
                     atOptions = {
@@ -499,6 +518,7 @@
         
         {{Description}}
         
+        <!-- Horizontal Banner Ad (728x90) -->
         <div class="ad-banner-container">
             <div class="ad-banner">
                 <script>
